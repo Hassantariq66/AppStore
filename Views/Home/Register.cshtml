@@ -1,0 +1,250 @@
+﻿<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@using FreeAppsDownload.Models;
+@model FreeAppsDownload.Models.User
+
+<script>
+
+    var submit = true;
+
+    function check() {
+        if (!submit)
+        {
+            return false;
+        }
+        var p1 = document.getElementById('password').value;
+        var p2 = document.getElementById('password1').value;
+        var email = document.getElementById('email').value;
+        if (p1==p2) {
+            return true;
+        }
+        else {
+            var error = document.getElementById('error');
+            error.innerHTML = "Password Didn't match";
+            return false;
+        }
+        if(email.indexOf('@@')<0 || email.indexOf('.')<0)
+        {
+            alert("email have at ");
+            return false;
+        }
+        return false;
+    }
+    $(document).ready(function () {
+
+
+        $('#username').change((function () {
+
+            var userName = $('#username').val();
+
+            $.getJSON("/home/CheckUserName?username=" + userName, function (data) {
+                if (data) {
+                    $('#usercheck').html("Available");
+                    submit = true;
+
+                }
+                else {
+                    $('#usercheck').html("Not Available");
+                    submit = false;
+                }
+            });
+
+        }));
+
+
+
+        $('#email').change((function () {
+
+            var userName = $('#email').val();
+
+            $.getJSON("/home/CheckEmail?email=" + userName, function (data) {
+                if (data) {
+                    $('#emailcheck').html("Available");
+                    submit = true;
+
+                }
+                else {
+                    $('#emailcheck').html("Already Registered");
+                    submit = false;
+                }
+            });
+
+        }));
+
+    });
+</script>
+
+
+
+<div class="container">
+
+
+    @{
+        List<Category> cat = null;
+        if (Session["category"] != null)
+        {
+            cat = (List<Category>)Session["category"];
+        }
+    }
+    <div class="sub-cate">
+        <div class=" top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+                        @{
+                            var OS = "android";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item2">
+                    <!---->
+                    <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "ios";
+
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+                        @{
+                            OS = "wos";
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bbos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+	<div class="account_grid">
+        @using (Html.BeginForm("RegisterCheck", "Home", FormMethod.Post, new { onsubmit="return check()"}))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+			<div class="login-right">
+				<h3>PERSONAL INFORMATION</h3>
+				@if (ViewBag.Message != null)
+    {
+                   <div class="alert alert-danger" role="alert">
+                  @ViewBag.Message
+                </div>
+					<h4 class="alert_info"></h4>
+    }
+				<div class="mation">
+
+					<span>First Name<label>*</label></span>
+                    @Html.TextBoxFor(m => m.fname)
+                    @Html.ValidationMessageFor(m => m.fname)
+					<br>
+					<span>Last Name<label>*</label></span>
+                    @Html.TextBoxFor(m => m.lname, new { required = "required" })
+                    @Html.ValidationMessageFor(m => m.lname)
+					<br>
+					<span>User Name(must be unique)<label>*</label></span>
+					@Html.TextBoxFor(m => m.username, new { required = "required" })
+                    @Html.ValidationMessageFor(m => m.username)
+                    <label id="usercheck" style="color:#F97E76"> </label>
+					<br>
+					<span>Email Address(must be unique)<label>*</label></span>
+                    @Html.EditorFor(m => m.email, new { required = "required" })
+                    @Html.ValidationMessageFor(m => m.email)
+                    <label id="emailcheck" style="color:#F97E76"> </label>
+					<br>
+					<a class="news-letter" href="#">
+						<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up</label>
+					</a>
+				</div>
+			</div>
+			<div class="login-right">
+				<h3>LOGIN INFORMATION</h3>
+				<div class="mation">
+					
+                    <span>Password<label>*</label></span>
+                    @Html.TextBoxFor(m => m.password, new { required = "required", type = "password" })
+					<br>
+                    <span>Password<label>*</label></span>
+                    <input type="password" name="password1" id="password1" required/>
+                   
+                    <label id="error" style="color: #F97E76;"></label><br>
+				</div>
+				<div class="register-but">
+					<input type="submit" value="submit">
+					<div class="clearfix"> </div>
+				</div>
+
+			</div>
+
+        }
+
+	</div>
+	<!--starting of sidebar-->
+    
+	
+    
+
+</div>
+

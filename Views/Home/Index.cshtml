@@ -1,0 +1,591 @@
+﻿<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+
+@using FreeAppsDownload.Models
+
+@if(TempData["noApp"]==null)
+{
+    try { 
+    var ap = ViewBag.list;
+    List<ApplicationAndComment> downlaod = ViewBag.download;
+        
+       
+<div class="container">	
+    <div class="shoes-grid"> 
+            <div class="wrap-in">
+                <div class="wmuSlider example1 slide-grid">
+                    <div class="wmuSliderWrapper">
+                        <article style="position: absolute; width:100%; opacity: 0;">
+                            <div class="banner-matter">
+                                <div class="col-md-5 banner-bag">
+                                    <img class="img-responsive " src="@Url.Content(downlaod[0].application.image1)" alt=" " />
+                                </div>
+                                <div class="col-md-7 banner-off">
+                                    <h2>@downlaod[0].application.name</h2>
+                                    <label>You can download it <b>Free</b></label>
+                                        @{ Application product = downlaod[0].application;}
+                                        @if (product.desc.ToString().Count() > 50)
+                                        {
+                                        <p>@product.desc.Substring(0, 50) ...</p>
+                                        }
+                                        else if (product.desc.ToString().Count() > 20)
+                                        {
+                                            <p>@product.desc.Substring(0, 20) ....</p>
+                                        }
+                                        else
+                                        {   <p>@product.name......</p>
+                                        }
+                                    <a href="@Url.Action("Single", "Home", new { id = downlaod[0].application.Id })"> <span class="on-get">Get Now </span></a>
+                                </div>
+
+                                <div class="clearfix"> </div>
+                            </div>
+                        </article>
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-matter">
+                                <div class="col-md-5 banner-bag">
+                                    <img class="img-responsive " src="@Url.Content(downlaod[1].application.image1)" alt=" " />  
+                                </div>
+                                <div class="col-md-7 banner-off">
+                                    <h2>@downlaod[1].application.name</h2>
+                                    <label>You can download it <b>Free</b></label>
+                                    @{ product = downlaod[1].application;}
+                                    @if (product.desc.ToString().Count() > 50)
+                                    {
+                                        <p>@product.desc.Substring(0, 50) ...</p>
+                                    }
+                                    else if (product.desc.ToString().Count() > 20)
+                                    {
+                                        <p>@product.desc.Substring(0, 20) ....</p>
+                                    }
+                                    else
+                                    {   <p>@product.name......</p>
+                                    }
+                                    <a href="@Url.Action("Single", "Home", new { id = downlaod[1].application.Id })"> <span class="on-get">Get Now </span></a>
+                                </div>
+
+                                <div class="clearfix"> </div>
+                            </div>
+
+                        </article>
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-matter">
+                                <div class="col-md-5 banner-bag">
+                                    <img class="img-responsive " src="@Url.Content(downlaod[2].application.image1)" alt=" " />  
+                                </div>
+                                <div class="col-md-7 banner-off">
+                                    <h2>@downlaod[2].application.name</h2>
+                                    <label>You can download it <b>Free</b></label>
+                                    @{product = downlaod[2].application;}
+                                    @if (product.desc.ToString().Count() > 50)
+                                    {
+                                        <p>@product.desc.Substring(0, 50) ...</p>
+                                    }
+                                    else if (product.desc.ToString().Count() > 20)
+                                    {
+                                        <p>@product.desc.Substring(0, 20) ....</p>
+                                    }
+                                    else
+                                    {   <p>@product.name......</p>
+                                    }
+                                    <a href="@Url.Action("Single", "Home", new { id = downlaod[2].application.Id })"> <span class="on-get">Get Now </span></a>
+                                </div>
+
+                                <div class="clearfix"> </div>
+                            </div>
+
+                        </article>
+
+                    </div>
+        <ul class="wmuSliderPagination">
+            <li><a href="#" class="">0</a></li>
+            <li><a href="#" class="">1</a></li>
+            <li><a href="#" class="">2</a></li>
+        </ul>
+        <script src="~/Scripts/jquery.wmuSlider.js"></script>
+        <script>
+            $('.example1').wmuSlider();
+        </script>
+    </div>
+</div>    	
+<!---->
+<div class="products">
+        <h5 class="latest-product">Most Popular</h5>
+        <a class="view-all" href="@Url.Action("ViewApps", "Home")">VIEW ALL<span> </span></a>
+</div>
+<div class="shoes-grid-left">
+    <a href="@Url.Action("Single", "Home", new { id = ap[3].application.Id })">
+        <div class="col-md-6 con-sed-grid">
+            <div class=" elit-grid">
+                <h4>@ap[3].application.name</h4>
+                <label>The Most Popular App</label>
+				<p>This App have highest comments among other Applications</p>
+                <span class="on-get">Get Now</span>
+            </div>
+            <img class="img-responsive shoe-lseft" src="@Url.Content(ap[3].application.image1)" style="max-width:163px; max-height:160px;" alt=" " />
+
+            <div class="clearfix"> </div>
+
+        </div>
+    </a>
+    <a href="@Url.Action("Single", "Home", new { id = ap[4].application.Id })">
+        <div class="col-md-6 con-sed-grid sed-left-top">
+			<div class=" elit-grid">
+
+				<h4>@ap[4].application.name</h4>
+				<label>The Most Popular App</label>
+				<p>This App have highest comments among other Applications</p>
+				<span class="on-get">Get Now</span>
+			</div>
+			<img class="img-responsive shoe-lseft" src="@Url.Content(ap[4].application.image1)" style="max-width:163px; max-height:160px;" alt=" " />
+
+			<div class="clearfix"> </div>
+        </div>
+    </a>
+</div>
+
+      <!-- Most Downloaded Apps-->
+<div class="products">
+      <h5 class="latest-product">Most Downloaded</h5>
+       <a class="view-all" href="@Url.Action("ViewApps", "Home")">VIEW ALL<span> </span></a>
+</div>
+
+
+        <div class="product-left">
+
+            <div class="col-md-4 chain-grid">
+                <a href="@Url.Action("Single", "Home", new { id=downlaod[0].application.Id})"><img class="img-responsive chain" src="@Url.Content(downlaod[0].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="@Url.Action("Single", "Home")">@downlaod[0].application.name</a></h6>
+                    <div class="star-price">
+                        <div class="">
+                            <span class="rating">
+                                @{
+                                    var rating = 0;
+                                    try
+                                    {
+                                        foreach (var c in downlaod[0].comment)
+                                        {
+                                            rating += c.rating;
+                                        }
+                                        if (downlaod[0].comment.Count == 0)
+                                        {
+                                            rating /= downlaod[0].comment.Count + 1;
+                                        }
+                                        else
+                                        {
+                                            rating /= downlaod[0].comment.Count;
+                                        }
+
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                    }
+                                }
+                                @for (int i = 0; i < rating; i++)
+                                {
+                                    <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                    <label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+                                }
+                                @for (int i = 0; i < 5 - rating; i++)
+                                {
+                                    <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                    <label for="rating-input-1-@(+(5-(rating+i)))" class="rating-star"> </label>
+                                }
+
+
+                            </span>
+
+                        </div>
+                        <a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id = downlaod[0].application.Id })">Get Now</a>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid">
+                <a href="@Url.Action("Single", "Home", new { id = downlaod[1].application.Id })"><img class="img-responsive chain" src="@Url.Content(downlaod[1].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="@Url.Action("Single", "Home")">@downlaod[1].application.name</a></h6>
+                    <div class="star-price">
+                        <div class="">
+                            <span class="rating">
+                                @{
+                                    rating = 0;
+                                    try
+                                    {
+                                        foreach (var c in downlaod[1].comment)
+                                        {
+                                            rating += c.rating;
+                                        }
+                                        if (downlaod[1].comment.Count == 0)
+                                        {
+                                            rating /= downlaod[1].comment.Count + 1;
+                                        }
+                                        else
+                                        {
+                                            rating /= downlaod[1].comment.Count;
+                                        }
+
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                    }
+
+                                }
+
+                                @for (int i = 0; i < rating; i++)
+                                {
+                                    <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                    <label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+                                }
+                                @for (int i = 0; i < 5 - rating; i++)
+                                {
+                                    <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                    <label for="rating-input-1-@(+(5-(rating+i)))" class="rating-star"> </label>
+                                }
+                            </span>
+                        </div>
+                        <a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id = downlaod[1].application.Id })">Get Now</a>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="@Url.Action("Single", "Home", new { id = downlaod[2].application.Id })"><img class="img-responsive chain" src="@Url.Content( downlaod[2].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="@Url.Action("Single", "Home")">@downlaod[2].application.name</a></h6>
+                    <div class="star-price">
+                        <div class="">
+                            <span class="rating">
+                                @{
+                                    rating = 0;
+                                    try
+                                    {
+                                        foreach (var c in downlaod[2].comment)
+                                        {
+                                            rating += c.rating;
+                                        }
+                                        if (downlaod[2].comment.Count == 0)
+                                        {
+                                            rating /= downlaod[2].comment.Count + 1;
+                                        }
+                                        else
+                                        {
+                                            rating /= downlaod[2].comment.Count;
+                                        }
+
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                    }
+
+                                    for (int i = 0; i < rating; i++)
+                                    {
+                                        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                        <label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+                                    }
+                                    for (int i = 0; i < 5 - rating; i++)
+                                    {
+                                        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                        <label for="rating-input-1-@(+(5-(rating+i)))" class="rating-star"> </label>
+                                    }
+                                }
+
+                            </span>
+                        </div>
+                        <a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id = downlaod[2].application.Id })">Get Now</a>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+<!--Most Recent-->
+<div class="products">
+    <h5 class="latest-product">LATEST APPS</h5>
+    <a class="view-all" href="@Url.Action("ViewApps", "Home")">VIEW ALL<span> </span></a>
+</div>
+		    
+        
+        <div class="product-left">
+
+			<div class="col-md-4 chain-grid">
+				<a href="@Url.Action("Single", "Home", new { id=ap[0].application.Id})"><img class="img-responsive chain" src="@Url.Content(ap[0].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+				<span class="star"> </span>
+				<div class="grid-chain-bottom">
+					<h6><a href="@Url.Action("Single", "Home")">@ap[0].application.name</a></h6>
+					<div class="star-price">
+						<div class="">
+							<span class="rating">
+								@{
+								   rating = 0;
+									try
+									{
+										foreach (var c in ap[0].comment)
+										{
+											rating += c.rating;
+										}
+										if (ap[0].comment.Count == 0)
+										{
+											rating /= ap[0].comment.Count + 1;
+										}
+										else
+										{
+											rating /= ap[0].comment.Count;
+										}
+
+
+									}
+									catch (Exception ex)
+									{
+
+									}
+									}
+									@for (int i = 0; i < rating; i++)
+									{
+										<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+										<label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+									}
+									@for (int i = 0; i < 5 - rating; i++)
+									{
+										<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+										<label for="rating-input-1-@(+(5-(rating+i)))" class="rating-star"> </label>
+									}
+
+								
+							</span>
+							
+						</div>
+						<a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id=ap[0].application.Id})">Get Now</a>
+
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 chain-grid">
+			<a href="@Url.Action("Single", "Home", new { id=ap[1].application.Id})"><img class="img-responsive chain" src="@Url.Content(ap[1].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+			<span class="star"> </span>
+			<div class="grid-chain-bottom">
+				<h6><a href="@Url.Action("Single", "Home")">@ap[1].application.name</a></h6>
+				<div class="star-price">
+					<div class="">
+						<span class="rating">
+							@{
+								rating = 0;
+								try
+								{
+									foreach (var c in ap[1].comment)
+									{
+										rating += c.rating;
+									}
+									if (ap[1].comment.Count == 0)
+									{
+										rating /= ap[1].comment.Count + 1;
+									}
+									else
+									{
+										rating /= ap[1].comment.Count;
+									}
+
+
+								}
+								catch (Exception ex)
+								{
+
+								}
+
+							}
+
+							@for (int i = 0; i < rating; i++)
+							{
+								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+								<label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+							}
+							@for (int i = 0; i < 5 - rating; i++)
+							{
+								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+								<label for="rating-input-1-@(+(5-(rating+i)))"  class="rating-star"> </label>
+							}
+							</span>
+					</div>
+					<a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id=ap[1].application.Id})">Get Now</a>
+
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>                                  
+    <div class="col-md-4 chain-grid grid-top-chain">			
+        <a href="@Url.Action("Single", "Home", new { id=ap[2].application.Id})"><img class="img-responsive chain" src="@Url.Content(ap[2].application.image1)" style="max-height:255px;max-width:179px" alt=" " /></a>
+        <span class="star"> </span>
+        <div class="grid-chain-bottom">
+            <h6><a href="@Url.Action("Single", "Home")">@ap[2].application.name</a></h6>
+            <div class="star-price">
+                <div class="">																							  
+					<span class="rating">
+						@{
+							rating = 0;
+							try
+							{
+								foreach (var c in ap[2].comment)
+								{
+									rating += c.rating;
+								}
+								if (ap[2].comment.Count == 0)
+								{
+									rating /= ap[2].comment.Count + 1;
+								}
+								else
+								{
+									rating /= ap[2].comment.Count;
+								}
+
+
+							}
+							catch (Exception ex)
+							{
+
+							}
+
+							for (int i = 0; i < rating; i++)
+							{
+								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+								<label for="rating-input-1-@(+(5-i))" class="rating-star1"> </label>
+							}
+							for (int i = 0; i < 5 - rating; i++)
+							{
+								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+								<label for="rating-input-1-@(+(5-(rating+i)))" class="rating-star"> </label>
+							}
+						}
+
+					</span>	
+                </div>
+                <a class="now-get get-cart" href="@Url.Action("Single", "Home", new { id=ap[2].application.Id})">Get Now</a>
+				
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+	</div>
+</div> 
+</div>
+
+    
+    @{List<Category> cat = null;
+    if (Session["category"] != null)
+    {
+        cat = (List<Category>)Session["category"];
+    }
+    }
+<div class="sub-cate">
+    <div class=" top-nav rsidebar span_1_of_left">
+        <h3 class="cate">CATEGORIES</h3>
+        <ul class="menu">
+            <li class="item1">
+                <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                <ul class="cute">
+
+                    @{
+                        var OS = "android";
+                    }
+                    @if (cat != null)
+                    {
+                        foreach (Category c in cat)
+                        {
+                            <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="item2">
+                <!---->
+                <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                <ul class="cute">
+                    @{
+                        OS = "ios";
+
+
+                    }
+                    @if (cat != null)
+                    {
+                        foreach (Category c in cat)
+                        {
+                            <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="item3">
+                <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                <ul class="cute">
+                    @{
+                        OS = "wos";
+
+                    }
+                    @if (cat != null)
+                    {
+                        foreach (Category c in cat)
+                        {
+                            <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="item4">
+                <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                <ul class="cute">
+                    @{
+                        OS = "bbos";
+                    }
+                    @if (cat != null)
+                    {
+                        foreach (Category c in cat)
+                        {
+                            <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="item5">
+                <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                <ul class="cute">
+                    @{
+                        OS = "bos";
+                    }
+                    @if (cat != null)
+                    {
+                        foreach (Category c in cat)
+                        {
+                            <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                        }
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+}catch( Exception ex)
+    { 
+    
+    }
+}
+else
+{
+}

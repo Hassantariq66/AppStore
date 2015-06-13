@@ -1,0 +1,179 @@
+﻿@using PagedList.Mvc;
+@using PagedList; 
+@model FreeAppsDownload.Models.Application
+@using FreeAppsDownload.Models;
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+
+
+<!--<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />-->
+<div class="container">
+    
+    @{
+        List<Category> cat = null;
+        if (Session["category"] != null)
+        {
+            cat = (List<Category>)Session["category"];
+        }
+    }
+    <div class="sub-cate">
+        <div class=" top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+                        @{
+                            var OS = "android";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item2">
+                    <!---->
+                    <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "ios";
+
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+                        @{
+                            OS = "wos";
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bbos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="women-product">
+        <div class="w_content">
+            <div class="women">
+                <h4>Apps-<span>@ViewBag.OnePageOfProducts.Count items</span> </h4>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!-- grids_of_4 -->
+        <div class="grid-product">
+
+            @foreach (Application product in ViewBag.OnePageOfProducts)
+{
+    <div class="product-grid col-lg-4">
+        <div class="content_box ">
+            <div class="left-grid-view grid-view-left">
+                <a href="@Url.Action("Single", "Home",new {id=product.Id})">
+
+                    <img src="@Url.Content(product.image1)" class=" img-responsive watch-right" style="max-width:210px;max-height:200px;" alt="image" />
+                </a>
+            </div>
+            <div align="center">
+                <h4><a href="@Url.Action("Single", "Home",new {id=product.Id})"> @product.name</a></h4>
+
+                @if (product.desc.ToString().Count() > 50)
+                {
+                    <p style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;max-width:200px;">@product.desc.Substring(0, 50) ...</p>
+                }
+                else if (product.desc.ToString().Count() > 20)
+                {
+                    <p>@product.desc.Substring(0, 20) ....</p>
+                }
+                else
+                {   <p>@product.name......</p>
+                }
+            </div>
+        </div>
+    </div>
+}
+           
+    
+        </div>
+
+        <div style="text-align: center">
+            @{ OS = ViewBag.os; var cate = ViewBag.cat; var rat = ViewBag.rating; var a = ViewBag.a; }
+            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("ViewApps", new { os = OS, cat = cate, page = page }))
+        </div>
+        <!---
+        <div class="clearfix"> </div>
+        <ul class="pager">
+            <li class="previous"><a href="#">Previous</a></li>
+            <li class="next"><a href="#">Next</a></li>
+        </ul>
+        -->
+    </div>
+
+    <!--Sub categories code-->
+
+    
+
+
+
+
+    <!--end of sub catogory-->
+
+</div>
+<!--end of container-->

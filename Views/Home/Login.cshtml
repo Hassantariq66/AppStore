@@ -1,0 +1,137 @@
+﻿@*---------------------------creating a sideBar-----------------------------------------------*@
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@using FreeAppsDownload.Models;
+@model FreeAppsDownload.Models.User
+@if (Model != null)
+{
+    <script> alert("Login SuccessFully") </script>
+}
+
+<div class="container">
+	 <!--Starting of sub catogory-->
+    @{
+        List<Category> cat = null;
+        if (Session["category"] != null)
+        {
+            cat = (List<Category>)Session["category"];
+        }
+    }
+    <div class="sub-cate">
+        <div class=" top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+                        @{
+                            var OS = "android";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item2">
+                    <!---->
+                    <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "ios";
+
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+                        @{
+                            OS = "wos";
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bbos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="account_grid">
+        <div class=" login-right">
+            <h3>REGISTERED CUSTOMERS</h3>
+            <p>If you have an account with us, please log in.</p>
+            <form action="@Url.Action("LoginCheck", "Home")" method="post" >
+                <div>
+                    <span>User Name<label>*</label></span>
+                    <input name="username" type="text" required>
+                </div>
+                <div>
+                    <span>Password<label>*</label></span>
+                    <input name="password" type="password" required>
+                </div>
+                <a class="forgot" href="#">Forgot Your Password?</a>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div class="login-left">
+            <h3>NEW CUSTOMERS</h3>
+            <p>By creating An account you will be able to download Apps without any restrictions.</p>
+            <a class="acount-btn" href="@Url.Action("Register", "Home")">Create an Account</a>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

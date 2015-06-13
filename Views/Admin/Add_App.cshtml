@@ -1,0 +1,66 @@
+﻿@model List<FreeAppsDownload.Models.Category>
+
+<section id="main" class="column">
+    <form action="@Url.Action("Post_App", "Admin")" method="post" enctype="multipart/form-data">
+        <h4 class="alert_info">Welcome to Add App Page</h4>
+        <article class="module width_full">
+            <header><h3>Post New App</h3></header>
+            <div class="module_content">
+                <fieldset>
+                    <label>Application Title</label>
+                    <input type="text" name="title" required>
+                </fieldset>
+                <fieldset>
+                    <label>Description</label>
+					<textarea rows="12" name="desc" required></textarea>
+                </fieldset>
+                <fieldset style="width:48%; float:left; margin-right: 3%;">
+                    <!-- to make two field float next to one another, adjust values accordingly -->
+                    <label>Select OS</label>
+                    <select name="os" style="width:92%;">
+                        <option value="android">Android</option>
+                        <option value="ios">Apple OS</option>
+                        <option value="wos">Windows OS</option>
+                        <option value="bbos">Blackberry OS</option>
+                        <option value="bos">Bada OS</option>
+                    </select>
+                </fieldset>
+                <fieldset style="width:48%; float:left;">
+                    <label>Category</label>
+                    <select name="cat" style="width:92%;">
+                        @foreach(var c in Model)
+                        {
+                          <option value="@c.value">@c.Category1</option>  
+                        }
+                    </select>
+                </fieldset><div class="clear"></div>
+                <fieldset style="width:48%; float:left; margin-right: 3%;">
+                    <label>First Image</label>
+					<input type="file" name="image1" accept="image/gif, image/jpeg" required />
+                </fieldset>
+                <fieldset style="width:48%; float:left; ">
+                    <label>Second Image</label>
+					<input type="file" name="image2" accept="image/gif, image/jpeg" required />
+                </fieldset><div class="clear"></div>
+
+                <fieldset style="width:48%; float:left; margin-right: 3%;">
+                    <label>Third Image</label>
+					<input type="file" name="image3" accept="image/gif, image/jpeg" required />
+                </fieldset>
+                <fieldset style="width:48%; float:left; ">
+                    <label>OS File</label>
+					<input type="file" name="file" accept="application/apk" required />
+                </fieldset><div class="clear"></div>
+
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="Publish" class="alt_btn">
+                </div>
+            </footer>
+
+        </article>
+    </form>
+
+    <h4 class="alert_warning">STATUS: @ViewBag.status </h4>
+</section>

@@ -1,0 +1,40 @@
+﻿@model FreeAppsDownload.Models.Admin
+
+<section id="main" class="column">
+	@using (Html.BeginForm("", "", FormMethod.Post))
+	{
+
+		<h4 class="alert_info">Profile Information</h4>
+		<article class="module width_full">
+			<div class="module_content">
+
+				<fieldset>
+					<label>First Name</label>
+					@Html.TextBoxFor(m => m.fname, new { @readonly = "readonly" })
+				</fieldset>
+				<fieldset>
+					<label>Last Name</label>
+					@Html.TextBoxFor(m => m.lname, new { @readonly = "readonly" })
+				</fieldset>
+				<fieldset>
+					<label>Email</label><br>
+					@Html.TextBoxFor(m => m.email, new { @readonly = "readonly" })
+				</fieldset>
+				<fieldset>
+					<label>Username</label>
+					@Html.TextBoxFor(m => m.username, new { @readonly = "readonly" })
+				</fieldset>
+				<fieldset>
+					<label>password</label><br>
+					@Html.TextBoxFor(m => m.password, new { @readonly = "readonly" })
+				</fieldset>
+			</div>
+			<footer>
+				<div class="submit_link">
+					
+				</div>
+			</footer>
+
+		</article>
+	}
+</section>

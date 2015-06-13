@@ -1,0 +1,173 @@
+﻿<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@model FreeAppsDownload.Models.User
+@using FreeAppsDownload.Models
+
+<div class="container">
+
+
+    @{
+        List<Category> cat = null;
+        if (Session["category"] != null)
+        {
+            cat = (List<Category>)Session["category"];
+        }
+    }
+    <div class="sub-cate">
+        <div class=" top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+                        @{
+                            var OS = "android";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item2">
+                    <!---->
+                    <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "ios";
+
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+                        @{
+                            OS = "wos";
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bbos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+	<div class="account_grid">
+		<form action="@Url.Action("UpdateUser", "Home")" method="post" onsubmit=" return check()">
+			<div class="login-right">
+				<h3>PERSONAL INFORMATION</h3>
+				@if (ViewBag.Message != null)
+				{
+					<h4 class="alert_info">@ViewBag.Message</h4>
+				}
+				<div class="mation">
+					<input type="hidden" name="Id" value="@Model.Id" >
+					<span>First Name<label>*</label></span>
+					<input type="text" name="fname" value="@Model.fname" required>
+					<br>
+					<span>Last Name<label>*</label></span>
+					<input type="text" name="lname" value="@Model.lname" required>
+					<br>
+					<span>User Name(must be unique)<label>*</label></span>
+					<input type="text"  name="username" value="@Model.username" readonly>
+					<br>
+					<span>Email Address<label>*</label></span>
+					<input type="email" name="email" value="@Model.email " required> 
+					<br>
+					<a class="news-letter" href="#">
+						<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up</label>
+					</a>
+				</div>
+			</div>
+			<div class="login-right">
+				<h3>Change Password</h3>
+				<div class="mation">
+					<span>Password<label>*</label></span>
+					<input type="password" name="password" value="@Model.password.Trim()" required>
+					<br>
+				</div>
+				<div class="register-but">
+					<input type="submit" value="Update">
+					<div class="clearfix"> </div>
+				</div>
+
+			</div>
+
+		</form>
+
+	</div>
+	<!--starting of sidebar-->
+	
+
+
+
+</div>
+<script>
+	function check() {
+		var p1 = document.getElementsByName("password");
+		var p2 = document.getElementsByName("password1");
+		if (p1 === p2) {
+			alert("your password didn't match");
+			return false;
+		}
+		else
+			return true;
+
+	}
+</script>

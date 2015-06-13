@@ -1,0 +1,313 @@
+﻿@using FreeAppsDownload.Controllers;
+@using FreeAppsDownload.Models;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paid Apps For Free</title>
+    <link href="~/Content/shop-item.css" rel="stylesheet">
+    <link href="~/Content/form.css" rel="stylesheet">
+    <link href="~/Content/css/css.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/flaty.bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!--theme-style-->
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+    
+	<!-- Add jQuery library -->
+
+	<!-- Add mousewheel plugin (this is optional) -->
+	<!--<script type="text/javascript" src="~/Scripts/FancyBox/jquery.mousewheel-3.0.6.pack.js"></script>
+    <link rel="stylesheet" href="~/Content/FancyBox/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/Content/FancyBox/jquery.fancybox-buttons.js"></script>
+    <script type="text/javascript" src="~/Content/FancyBox/jquery.fancybox-media.js"></script>
+
+    <link rel="stylesheet" href="~/Content/FancyBox/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/Content/FancyBox/jquery.fancybox-thumbs.js"></script>
+    <link rel="stylesheet" href="~/Content/FancyBox/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/Content/FancyBox/jquery.fancybox.pack.js"></script>
+
+        -->
+	<!-- Add fancyBox -->
+	
+	<!-- Optionally add helpers - button, thumbnail and/or media -->
+	
+ 
+
+    <!--script-->
+        <meta name="viewport" content="width=device-width" />
+        <title></title>
+        <script src="~/Scripts/jquery.fancybox.js"></script>
+        <script src="~/Scripts/jquery.fancybox.pack.js"></script>
+        <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+        <script>
+
+            $(document).ready(function () {
+                $(".fancybox").fancybox({
+                    openEffect: 'none',
+                    closeEffect: 'none'
+                });
+            });
+            
+        </script>
+
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+         </script>
+
+    
+
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bottom-header">
+            <div class="container">
+                <div class="header-bottom-left">
+                    <div class="logo">
+                        <a href="@Url.Action("Index","Home")"><img src="~/Images/logo.png" alt=" " /></a>
+                    </div>
+                   <!-- <div class="search">
+                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                    <button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-search"></i>Contact</button>
+                       -->
+                    <div class="navbar-form navbar-left">
+                        
+
+                    </div>
+                    <form class="navbar-form navbar-right" style="margin-top:10px" action="@Url.Action("ViewApps","Home")" method="post">
+                        <div class="form-group">
+                            <input type="text" name="os" class="form-control" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                            <button class="btn btn-default" type="submit" style="background-color:#F97E76;border:none; " > <i class="glyphicon glyphicon-search"></i></button>
+                            <button type="button" style="background-color: #F97E76; border:none;" class="btn btn-info btn-group-sm" data-toggle="modal" data-target="#myModal">Advanced Search</button>
+                        </div>
+                    </form>
+                     
+                </div>
+
+
+                <!-- Modal -->
+                
+                
+
+                <div class="header-bottom-right">
+
+					@{
+						if (Session["user"] != null)
+						{
+							<div class="account"><a href="@Url.Action("Update", "Home") "><span> </span>YOUR ACCOUNT</a></div>
+						}
+						else
+						{
+							<div class="account"><a href="@Url.Action("Login", "Home") "><span> </span>YOUR ACCOUNT</a></div>
+						}
+					}
+                    
+                    <ul class="login">
+						@{	
+							if (Session["user"] != null)
+							{ 
+								<li ><a href="@Url.Action("Logout", "Home")"><span> </span>Logout</a></li>
+							}
+							else
+							{
+							<li><a href="@Url.Action("Login", "Home")"><span> </span>LOGIN |</a></li>
+							<li><a href="@Url.Action("Register", "Home")">SIGNUP</a></li>
+							}
+							}
+								
+						
+                        
+                    </ul> 
+					      
+                    <div class="cart"><a href="@Url.Action("Contact", "Home")"><span> </span>Contact</a></div>
+					                           
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div> 
+
+        @RenderBody()
+    <script type="text/javascript">
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+
+    });
+    </script>
+
+
+    <div class="modal fade" id="myModal" role="form">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color: #221F1F;color:#fff">
+            <div class="modal-header" style="padding:15px 15px;">
+                <button type="button" class="close" data-dismiss="modal" style="color:#fff">&times;</button>
+                <h4><span class="glyphicon glyphicon-search"></span> Search</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+
+
+                <form method="POST" action="@Url.Action("ViewApps","Home")" accept-charset="UTF-8">
+                    <div class="input-group " style="padding-left:15px;">
+                        <input type="text" class="form-control" name="a" placeholder="Keyword">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </span>
+                    </div>
+                    <div class="container" >
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <div class="dropdown">
+                                    <br>
+                                    <div><p>OS</p></div>
+                                    <select name="os" style="color:#000;background-color:white; font-size:small" class="btn btn-default dropdown-toggle">
+                                        <option value="android">Android</option>
+                                        <option value="ios">Apple OS</option>
+                                        <option value="wos">Windows OS</option>
+                                        <option value="bbos">Blackberry OS</option>
+                                        <option value="bos">Bada OS</option>
+                                    </select>
+                                </div>
+                                <div class="dropdown" >
+                                    <div><div><p>Category</p></div></div>
+                                    <select name="cat" style="color:#000;background-color:white; font-size:small" class="btn btn-default dropdown-toggle">
+                                        @if (Session["category"] != null)
+                                        {
+                                            List<Category> cat = (List<Category>)Session["category"];
+                                            foreach (var c in cat)
+                                            {
+                                                <option  value="@c.value">@c.Category1</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="dropdown">
+                                    <div><p>Rating</p></div>       
+                                    <select name="rating" style="color:#000;background-color:white; font-size:small" class="btn btn-default dropdown-toggle"><option value="5">5+</option><option value="4">4+</option><option value="3">3+</option><option value="2">2+</option><option value="1">1+</option></select>
+                                    
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!---->
+    <div class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="latter">
+                    <h6>NEWS-LETTER</h6>
+                    <div class="sub-left-right">
+                        <form action="@Url.Action("subscribe", "Home")" method="post">
+                            @if (Session["subscribe"] != null)
+                            {
+                                <label style="font-size:10px;color:red;float:left;margin-left:-120px"> @Session["subscribe"] </label>
+                                Session["subscribe"] = null;
+                            }
+                            <input type="email" style="height:35px; width:220px;" name="email" value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}" required/>
+                            <input type="submit" value="SUBSCRIBE" />
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="latter-right">
+                    <p>FOLLOW US</p>
+                    <ul class="face-in-to">
+                        <li><a href="https://www.facebook.com/Hassan.Tariq66"><span> </span></a></li>
+                        <li><a href="https://www.facebook.com/Hassan.Tariq66"><span class="facebook-in"> </span></a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-cate">
+                    <h6>CATEGORIES</h6>
+                    <ul>
+                        @{String cate = null;}
+                        <li><a href="@Url.Action("ViewApps", "Home", new { cat="android"})">android</a></li>
+                        <li><a href="@Url.Action("ViewApps", "Home", new { cat="ios"})"> IOS</a></li>
+                        <li><a href="@Url.Action("ViewApps", "Home", new { cat = "wos" })">Windows OS</a></li>
+                        <li><a href="@Url.Action("ViewApps", "Home", new { cat = "bbos" })">Blackberry OS</a></li>
+                        <li><a href="@Url.Action("ViewApps", "Home", new { cat = "bos" })">BADA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom-cate bottom-grid-cat">
+                    <h6>Links of Pages</h6>
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="@Url.Action("Register", "Home")">Register</a></li>
+                        <li><a href="@Url.Action("Login", "Home")">Login</a></li>
+                        <li><a href="@Url.Action("ViewApps", "Home")">View All Application</a></li>
+                    </ul>
+                </div>
+            <!--    <div class="footer-bottom-cate">
+                    <h6>TOP Apps</h6>
+                    <ul>
+                        <li><a href="#">Subway Surf</a></li>
+                        <li><a href="#">Temple Run</a></li>
+                        <li><a href="#">Flappy Bird</a></li>
+                    </ul>
+                </div>
+                -->
+                <div class="footer-bottom-cate cate-bottom pull-right">
+                    <h6>My ADDERSS</h6>
+                    <ul>
+                        <li>Gold Plaza</li>
+                        <li> Multan Road</li>
+                        <li>Lahore</li>
+                        <li>Pakistan</li>
+                        <li class="phone">PH : 0334-6506166</li>
+                        <li class="temp"> <p class="footer-class">Design by <a href="https://www.facebook.com/Hassan.Tariq66" target="_blank"> Hassan Tariq</a> </p></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>
+

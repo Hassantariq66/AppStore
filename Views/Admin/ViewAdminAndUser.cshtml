@@ -1,0 +1,78 @@
+﻿@using FreeAppsDownload.Models;
+
+<div class="container-fluid">
+    <article class="module width_3_quarter">
+        <header>
+            <h3 class="tabs_involved" style="padding-left:4%;">View Admin/User</h3>
+            <ul class="tabs">
+                <li><a href="#tab1">Admin's</a></li>
+                <li><a href="#tab2">User's</a></li>
+            </ul>
+        </header>
+		@{ Admin admin = (Admin)@Session["admin"];}
+        <div class="tab_container">
+            <div id="tab1" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Created On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+					@foreach(Admin ap in Model){
+						<tr>
+							<td>@ap.username</td>
+							<td>@ap.email</td>
+							<td>@ap.date</td>
+								@if (@admin.username.Trim().Equals("admin"))
+								{ 
+								<td><a href="@Url.Action("UpdateAdmin", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_edit.png" name="Id" title="Edit"></a><a href="@Url.Action("DeleteAdmin", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+							
+								}
+								else
+								{
+								 <td><input type="image" src="~/Content/images/icn_edit.png" name="Id" title="Edit"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></td>
+								}
+								
+						</tr>
+					}
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+            </div><!-- end of #tab1 -->
+			
+            <div id="tab2" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Created On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (User ap in ViewBag.user)
+						{
+							<tr>
+								<td>@ap.username</td>
+								<td>@ap.email</td>
+								<td>@ap.date</td> 
+								
+								<td><a href="@Url.Action("DeleteUser", "Admin", new { id=ap.Id})"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+								
+							</tr>
+						}
+                    </tbody>
+                </table>
+
+            </div><!-- end of #tab2 -->
+
+        </div><!-- end of .tab_container -->
+        <footer></footer>
+    </article><!-- end of content manager article -->
+</div>

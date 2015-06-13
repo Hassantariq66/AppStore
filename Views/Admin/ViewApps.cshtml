@@ -1,0 +1,89 @@
+﻿@using FreeAppsDownload.Models;
+<div class="container-fluid">
+    <article class="module width_3_quarter">
+        <header>
+            <h3 class="tabs_involved" style="padding-left:4%;">Content Manager</h3>
+            <ul class="tabs">
+                <li><a href="#tab1">Posts</a></li>
+                <li><a href="#tab2">Comments</a></li>
+                <li><a href="#tab3">Subscribers</a></li>
+            </ul>
+        </header>
+
+        <div class="tab_container">
+            <div id="tab1" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>OS</th>
+							<th>Category</th>
+                            <th>Downloaded</th>
+                            <th>Created On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						@foreach (Application ap in Model) {  
+                        <tr>
+                            <td>@ap.name</td>
+							<td>@ap.OS</td>
+                            <td>@ap.category</td>
+                            <td>@ap.download</td>
+                            <td>@ap.date</td>
+                            <td><a href="@Url.Action("UpdateApp", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_edit.png" name="Id" title="Edit"></a><a href="@Url.Action("DeleteApp", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+                        </tr>
+						}
+                    </tbody>
+                </table>
+            </div><!-- end of #tab1 -->
+
+            <div id="tab2" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Comment</th>
+                            <th>Posted by</th>
+                            <th>Posted On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (Comment ap in ViewBag.comment){
+							<tr>
+								<td>@ap.descr</td>
+								<td>@ap.username</td>
+								<td>@ap.date</td>
+								<td><a href="@Url.Action("DeleteComment", "Admin", new { id=ap.Id})"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+							</tr>
+							}
+                        
+                    </tbody>
+                </table>
+
+            </div><!-- end of #tab2 -->
+             <div id="tab3" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						@foreach (Subscribe ap in ViewBag.subscribe){  
+                        <tr>
+                            <td>@ap.email</td>
+                            <td>@ap.date</td>
+                            <td><a href="@Url.Action("DeleteSub", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+                        </tr>
+						}
+                    </tbody>
+                </table>
+            </div><!-- end of #tab1 -->
+
+        </div><!-- end of .tab_container -->
+        <footer></footer>
+    </article><!-- end of content manager article -->
+</div>

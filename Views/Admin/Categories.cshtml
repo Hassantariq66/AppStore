@@ -1,0 +1,117 @@
+﻿@using FreeAppsDownload.Models;
+@{ Admin admin = (Admin)@Session["admin"];}
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <div class="container">
+        
+        <article class="module width_3_quarter">
+            @if (TempData["status"] != null)
+            {
+                <div style="color:yellowgreen; margin-left:30%;">
+                    <h4 style="color:seagreen;padding-left:100px;">STATUS: @TempData["status"] </h4>
+                </div>
+                TempData["status"] = null;
+            }
+            <header>
+                <h3 class="tabs_involved" style="padding-left:4%;">View Categories</h3>
+            </header>
+
+
+            @if (TempData["update"] != null)
+            {
+                <form action="@Url.Action("Update_Category", "Admin")" method="post">
+
+                    <div class="module_content">
+                        @{Category cat = (Category)TempData["update"];}
+                        <fieldset style="width:48%; float:left; margin-right: 3%;">
+                            <label>Category Name*(Capital)</label>
+                            <input type="text" name="Category1" value="@cat.Category1" style="width:90%;" required />
+                        </fieldset>
+                        <fieldset style="width: 48%; float: right;">
+                            <label>Value*</label>
+                            <input type="text" name="value" value="@cat.value" style="width:90%;" required />
+                            <input type="hidden" name="id"  value="@cat.Id" style="width:90%;" required />
+                        </fieldset><div class="clear"></div>
+                        @{TempData["update"] = null;}
+                    </div>
+                    <footer>
+                        <div class="submit_link">
+                            <input type="submit" value="Publish" class="alt_btn">
+                        </div>
+                    </footer>
+                </form>
+            }
+            else
+            { 
+            <form action="@Url.Action("AddCategory", "Admin")" method="post">
+
+                <div class="module_content">
+                    <fieldset style="width:48%; float:left; margin-right: 3%;">
+                        <label>Category Name*(Capital)</label>
+                        <input type="text" name="Category1" style="width:90%;" required />
+                    </fieldset>
+                    <fieldset style="width: 48%; float: right;">
+                        <label>Value*</label>
+                        <input type="text" name="value" style="width:90%;" required />
+                    </fieldset><div class="clear"></div>
+
+                </div>
+                <footer>
+                    <div class="submit_link">
+                        <input type="submit" value="Publish" class="alt_btn">
+                    </div>
+                </footer>
+            </form>
+            }
+        </article>
+
+
+
+        <article class="module width_3_quarter">
+            <header>
+                <h3 class="tabs_involved" style="padding-left:4%;">View Categories</h3>
+                <ul class="tabs">
+                    <li><a href="#tab1">Categories</a></li>
+                </ul>
+            </header>
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <table class="tablesorter" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (Category ap in Model)
+                        {
+                            <tr>
+                                <td>@ap.Category1</td>
+                                <td>@ap.value</td>
+                                <td>@ap.date</td>
+                                @if (@admin.username.Trim().Equals("admin"))
+                                {
+                                    <td ><a href="@Url.Action("UpdateCategory", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_edit.png" name="Id" title="Edit"></a><a href="@Url.Action("DeleteCategory", "Admin", new { id = ap.Id })"><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></a></td>
+                                }
+                                else
+                                {
+                                    <td><input type="image" src="~/Content/images/icn_trash.png" title="Trash"></td>
+                                }
+
+                            </tr>
+                        }
+                        <tbody></tbody>
+                    </table>
+                </div><!-- end of #tab1 -->
+
+
+
+            </div><!-- end of .tab_container -->
+            <footer>
+
+            </footer>
+
+        </article><!-- end of content manager article -->
+    </div>

@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+
+@model FreeAppsDownload.Models.Admin
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <!-- styles -->
+    <link href="~/Content/Admin/Login/styles.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-bg">
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <h1 class="center-block"><a href="">Admin Panel</a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-wrapper">
+                    <div class="box">
+                        <div class="content-wrap">
+                            <h6>Sign In</h6>
+
+                            @using(Html.BeginForm("LoginCheck", "Admin",FormMethod.Post))
+							{ 
+
+									@Html.TextBoxFor(m => m.username, new { Class = "form-control", placeholder = "Username", required = "required" });
+									@Html.PasswordFor(m => m.password, new { Class = "form-control", placeholder = "Password", required = "required" });
+                                    <div class="action">
+                                        <input class="btn btn-primary signup" type="submit" value="Login">
+                                    </div>
+							}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Admin/custom.js"></script>
+</body>
+</html>

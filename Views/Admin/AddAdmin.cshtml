@@ -1,0 +1,43 @@
+﻿@model FreeAppsDownload.Models.Admin
+
+<section id="main" class="column">
+		@using (Html.BeginForm("Add_Admin", "Admin", FormMethod.Post)) { 
+					
+        <h4 class="alert_info">Welcome to Add Admin Page</h4>
+        <article class="module width_full">
+            <header><h3>Post New App</h3></header>
+            <div class="module_content">
+
+                <fieldset>
+                    <label>First Name</label>
+                    @Html.TextBoxFor(m => m.fname, new { placeholder = "First Name", type = "text", required = "required" })
+                </fieldset>
+                <fieldset>
+                    <label>Last Name</label>
+					@Html.TextBoxFor(m => m.lname, new { placeholder = "Last Name", type = "text", required = "required"  })
+                    
+                </fieldset>
+                <fieldset>
+                    <label>Email</label><br>
+                    @Html.TextBoxFor(m => m.email, new { placeholder = "Email", type = "email", required = "required"  })
+                </fieldset>
+                <fieldset>
+                    <label>Username</label>
+                    @Html.TextBoxFor(m => m.username, new { placeholder = "User Name", type = "text", required = "required" })
+                </fieldset>
+				<fieldset>
+                    <label>password</label><br>
+                    @Html.PasswordFor(m => m.password, new { placeholder = "Password", type = "password", required = "required"})
+                </fieldset>               
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="Add" class="alt_btn">
+                </div>
+            </footer>
+
+        </article>
+		}
+
+    <h4 class="alert_warning">STATUS: @ViewBag.status</h4>
+</section>

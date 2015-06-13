@@ -1,0 +1,139 @@
+﻿<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@using FreeAppsDownload.Models;
+
+<div class="container">
+
+    <!-- Starting of catogory-->
+    <div class="account_grid">
+        <div class="login-right">
+            <h3>Contact Form</h3>
+            <form method="post" action="MAILTO:hassan.tariq66@outlook.com" enctype="text/plain">
+                <div>
+                    <span>Name<label>*</label></span>
+                    <input type="text" class="textbox" required value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+                </div>
+                <div>
+                    <span>Email<label>*</label></span>
+                    <input type="text" class="textbox" required value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+                </div>
+                <div>
+                    <span>Message<label>*</label></span>
+                    <textarea rows="10" class="col-lg-12" required onfocus="this.value= '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                </div>
+                <div class="clearfix"> </div>
+                <input type="submit" value="Send">
+                <div class="clearfix"> </div>
+            </form>
+            <address class="address">
+                <p>6th floor gold Plaza<br>Multan Road</p>
+                <dl>
+                    <dt> </dt>
+                    <dd>Cell Phone:<span>0334-6506166</span></dd>
+                    <dd>FAX: <span>+1 800 658 5784</span></dd>
+                    <dd>E-mail:&nbsp; <a href="MAILTo:hassan.tariq66@outlook.com">hassan.tariq66@outlook.com</a></dd>
+                </dl>
+            </address>
+        </div>
+    </div>
+    @{
+        List<Category> cat = null;
+        if (Session["category"] != null)
+        {
+            cat = (List<Category>)Session["category"];
+        }
+    }
+    <div class="sub-cate">
+        <div class=" top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="#">Android<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+
+                        @{
+                           var OS = "android";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item2">
+                    <!---->
+                    <a href="#">Apple IOS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "ios";
+
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#">Windows OS<img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /> </a>
+                    <ul class="cute">
+                        @{
+                            OS = "wos";
+
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#">Blackberry OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bbos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#">BADA OS <img class="arrow-img" style="float:right;margin-top:20px" src="~/images/arrow1.png" alt="" /></a>
+                    <ul class="cute">
+                        @{
+                            OS = "bos";
+                        }
+                        @if (cat != null)
+                        {
+                            foreach (Category c in cat)
+                            {
+                                <li><a href="@Url.Action("ViewApps", "Home", new { os=OS ,cat=c.value})">@c.Category1</a></li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
